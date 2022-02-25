@@ -230,7 +230,7 @@ public class ArrayAligner : MonoBehaviour
 
     Transform GetCalibrationPoseForController(XRNode controllerNode)
     {
-        if (XRDevice.model.Equals("Oculus Rift CV1"))
+        if (XRSettings.loadedDeviceName.Equals("Oculus Rift CV1"))
         {
             // Check whether we're running on SteamVR or Oculus runtime
             if (XRSettings.loadedDeviceName == "OpenVR")
@@ -265,7 +265,7 @@ public class ArrayAligner : MonoBehaviour
                 return null;
             }
         }
-        else if (XRDevice.model.Contains("Windows"))
+        else if (XRSettings.loadedDeviceName.Contains("Windows"))
         {
             // Windows 'Mixed Reality'
             if (controllerNode == XRNode.LeftHand)
@@ -279,14 +279,14 @@ public class ArrayAligner : MonoBehaviour
                 return _wmrRightCalibration.transform;
             }
         }
-        else if (XRDevice.model.StartsWith("Vive"))
+        else if (XRSettings.loadedDeviceName.StartsWith("Vive"))
         {
             UnityEngine.Debug.Log("Using Vive controller for calibration");
             return _viveCalibration.transform;
         }
         else
         {
-            UnityEngine.Debug.LogErrorFormat("Unrecognised XR device: {0}", XRDevice.model);
+            UnityEngine.Debug.LogErrorFormat("Unrecognised XR device: {0}", XRSettings.loadedDeviceName);
             return null;
         }
     }
